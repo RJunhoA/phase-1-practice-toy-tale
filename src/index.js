@@ -1,3 +1,5 @@
+//Hi everyone!!!
+
 let addToy = false;
 
 document.addEventListener("DOMContentLoaded", () => {
