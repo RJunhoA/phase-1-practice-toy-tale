@@ -21,7 +21,7 @@ document.addEventListener("DOMContentLoaded", () => {
 //Use fetch() to make a "GET" request, then render the returned toys to the DOM
 function fetchImage() {
   fetch ("http://localhost:3000/toys")
-    .then(r => r.json)
+    .then(r => r.json())
     .then(data => {
       console.log(data)
       renderImage(data)
@@ -30,11 +30,11 @@ function fetchImage() {
 fetchImage()
 
 //creating function renderImage
-function renderImage(image) {
+function renderImage(images) {
   const toyCollection = document.querySelector('#toy-collection')
-  //image.forEach(image => {
+  images.forEach(image => {
     const li = document.createElement('li')
-    li.className = 'list-li'
+    li.className = 'card'
 
     const h3 = document.createElement('h3')
     h3.textContent = image.name
@@ -43,13 +43,17 @@ function renderImage(image) {
     const img = document.createElement('img')
     img.src = image.image
     img.alt = `${image.name} cover`
+    img.className = 'toy-avatar'
     li.append(img)
 
     const pLike = document.createElement('p')
-    pLike.textContent = image.likes
+    if (image.likes > 1) {
+      pLike.textContent.append('s')
+    }
+    pLike.textContent = `${image.likes} like`
     li.append(pLike)
 
     toyCollection.append(li)
 
-  //})
+  })
 }
